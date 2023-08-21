@@ -144,23 +144,183 @@
         <div class="col">
             <div class="border rounded">
                 <!-- <div class="border-top"></div> -->
-                <h5 class="bg-secondary p-2 m-0 rounded-top">Crop</h5>
+                <p class="bg-secondary p-2 m-0 rounded-top fw-bold">Crop</p>
                 <div class="p-2">
                     <div class="form-check">
-                        <input class="form-check-input border border-secondary" type="checkbox" value="" id="point_corn"
-                            data-layer="corn">
+                        <input name="corn" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_corn" data-layer="corn">
                         <label class="form-check-label" for="point_corn">
                             Corn
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input border border-secondary" type="checkbox" value=""
+                        <input name="paddy" class="form-check-input border border-secondary" type="checkbox" value=""
                             id="point_paddy" data-layer="paddy">
                         <label class="form-check-label" for="point_paddy">
                             Paddy
                         </label>
                     </div>
 
+                    <div class="form-check">
+                        <input name="baresoil" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_baresoil" data-layer="baresoil">
+                        <label class="form-check-label" for="point_baresoil">
+                            Baresoil
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="cassava" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_cassava" data-layer="cassava">
+                        <label class="form-check-label" for="point_cassava">
+                            Cassava
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="eucalyptus" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="point_eucalyptus" data-layer="eucalyptus">
+                        <label class="form-check-label" for="point_eucalyptus">
+                            Eucalyptus
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="forest" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_forest" data-layer="forest">
+                        <label class="form-check-label" for="point_forest">
+                            Forest
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="grassland" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="point_grassland" data-layer="grassland">
+                        <label class="form-check-label" for="point_grassland">
+                            Grassland
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="palm" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_palm" data-layer="palm">
+                        <label class="form-check-label" for="point_palm">
+                            Palm
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="rubber" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_rubber" data-layer="rubber">
+                        <label class="form-check-label" for="point_rubber">
+                            Rubber
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="building" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_building" data-layer="building">
+                        <label class="form-check-label" for="point_building">
+                            Building
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="sugarcane" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="point_sugarcane" data-layer="sugarcane">
+                        <label class="form-check-label" for="point_sugarcane">
+                            Sugarcane
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="water" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="point_water" data-layer="water">
+                        <label class="form-check-label" for="point_water">
+                            Water
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- Tambahkan item lain di sini -->
+            </div>
+            <div class="border rounded mt-2">
+                <!-- <div class="border-top"></div> -->
+                <p class="bg-secondary p-2 m-0 rounded-top fw-bold">Water Google Earth Engine</p>
+                <div class="p-2">
+                    <div class="form-check">
+                        <input name="water_occurence" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="water_occurence" data-layer="water_occurence">
+                        <label class="form-check-label" for="water_occurence">
+                            Water Occurence
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="change_intensity" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="change_intensity" data-layer="change_intensity">
+                        <label class="form-check-label" for="change_intensity">
+                            Change Intensity
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="water_season" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="water_season" data-layer="water_season">
+                        <label class="form-check-label" for="water_season">
+                            Water Season
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="land_cover" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="land_cover" data-layer="land_cover">
+                        <label class="form-check-label" for="land_cover">
+                            Land Cover
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Tambahkan item lain di sini -->
+            </div>
+            <!-- GEOSERVER -->
+            <div class="border rounded mt-2">
+                <!-- <div class="border-top"></div> -->
+                <p class="bg-secondary p-2 m-0 rounded-top fw-bold">Geo Server</p>
+                <div class="p-2">
+                    <div class="form-check">
+                        <input name="chachoengsao_prov" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="chachoengsao_prov" data-layer="chachoengsao_prov">
+                        <label class="form-check-label" for="chachoengsao_prov">
+                            Chachoengsao Prov
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="river_chachoengsao" class="form-check-input border border-secondary"
+                            type="checkbox" value="" id="river_chachoengsao" data-layer="river_chachoengsao">
+                        <label class="form-check-label" for="river_chachoengsao">
+                            River Chachoengsao
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="crops_chachoengsao" class="form-check-input border border-secondary"
+                            type="checkbox" value="" id="crops_chachoengsao" data-layer="crops_chachoengsao">
+                        <label class="form-check-label" for="crops_chachoengsao">
+                            Crops Chachoengsao
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="water_body" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="water_body" data-layer="water_body">
+                        <label class="form-check-label" for="water_body">
+                            Water Body
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="building_polygon" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="building_polygon" data-layer="building_polygon">
+                        <label class="form-check-label" for="building_polygon">
+                            Building Polygon
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Tambahkan item lain di sini -->
@@ -174,54 +334,7 @@
         <h5 class="text-start">Legenda</h5>
         <div class="col">
             <div class="border rounded">
-                <!-- <div class="border-top"></div> -->
-                <h5 class="bg-secondary p-2 m-0 rounded-top">Item List</h5>
-                <div class="p-2">
-                    <div class="form-check">
-                        <input class="form-check-input itemCheckbox border border-secondary" type="checkbox" value=""
-                            id="flexCheckDefault1" data-layer="markerGroup1">
-                        <label class="form-check-label" for="flexCheckDefault1">
-                            Item 1
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input itemCheckbox border border-secondary" type="checkbox" value=""
-                            id="flexCheckDefault2" data-layer="markerGroup2">
-                        <label class="form-check-label" for="flexCheckDefault2">
-                            Item 2
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input itemCheckbox border border-secondary" type="checkbox" value=""
-                            id="flexCheckDefault1" data-layer="markerGroup1">
-                        <label class="form-check-label" for="flexCheckDefault1">
-                            Item 1
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input itemCheckbox border border-secondary" type="checkbox" value=""
-                            id="flexCheckDefault2" data-layer="markerGroup2">
-                        <label class="form-check-label" for="flexCheckDefault2">
-                            Item 2
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input itemCheckbox border border-secondary" type="checkbox" value=""
-                            id="flexCheckDefault1" data-layer="markerGroup1">
-                        <label class="form-check-label" for="flexCheckDefault1">
-                            Item 1
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input itemCheckbox border border-secondary" type="checkbox" value=""
-                            id="flexCheckDefault2" data-layer="markerGroup2">
-                        <label class="form-check-label" for="flexCheckDefault2">
-                            Item 2
-                        </label>
-                    </div>
-                </div>
 
-                <!-- Tambahkan item lain di sini -->
             </div>
         </div>
 
