@@ -1,0 +1,106 @@
+/* SIDEBAR RIGHT */
+/* Sidebar basemap */
+.sidebar-basemap,
+.sidebar-layer,
+.sidebar-legend {
+    position: fixed;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    padding-top: 60px;
+    transition: right 0.3s;
+    z-index: 100;
+}
+
+.sidebar-basemap.active,
+.sidebar-layer.active,
+.sidebar-legend.active {
+    right: 0;
+}
+
+/* Transisi control-leaflet */
+.leaflet-control-layers,
+.leaflet-control-attribution,
+.leaflet-control-zoom {
+    transition: right 0.3s;
+}
+
+/* Transisi Container control basemap, layer, legend */
+.container-control-basemap,
+.container-control-layer,
+.container-control-legend {
+    transition: right 0.3s;
+}
+
+/* Button control basemap, layer, legend */
+.button-control-basemap,
+.button-control-layer,
+.button-control-legend {
+    background-color: transparent !important;
+    border: none !important;
+    width: 20px;
+    /* Tentukan lebar tombol */
+    height: 30px;
+    /* Tentukan tinggi tombol */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* CSS untuk mengatur ukuran gambar pada tombol kontrol */
+.custom-image {
+    width: 30px;
+    height: 30px;
+}
+
+/* SIDEBAR LEFT */
+.sidebar-analisis {
+    position: fixed;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    padding-top: 60px;
+    transition: left 0.3s;
+    z-index: 100;
+}
+
+.sidebar-analisis.active {
+    left: 0;
+}
+
+/* Container control analisis */
+.container-control-analisis,
+.leaflet-control-scale,
+/* search */
+.leaflet-control-geocoder,
+/* navigasi bar */
+.leaflet-control-navbar {
+    transition: left 0.3s;
+}
+
+/* Button control analisis */
+.button-control-analisis {
+    background-color: transparent !important;
+    border: none !important;
+    width: 20px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Style sidebar right */
+.sidebar-basemap,
+.sidebar-layer,
+.sidebar-legend {
+    border: 1px solid grey;
+    /* Menambahkan border pada kontainer */
+    padding: 10px;
+    /* Menambahkan ruang internal pada kontainer */
+    overflow-y: auto;
+    overflow-x: auto;
+}
