@@ -151,7 +151,7 @@ map.addControl(new customControlLegend());
 
 
 function adjustPositionControlSidebarLeft(sidebarClass) {
-    var sidebarWidth = document.querySelector(sidebarClass + '.active') ? 250 : 0; // Adjust the width based on sidebar visibility
+    var sidebarWidth = document.querySelector(sidebarClass + '.active') ? 450 : 0; // Adjust the width based on sidebar visibility
 
     // Atur posisi control leaflet
     var controlContainersLeaflet = document.querySelectorAll('.leaflet-control-scale, .leaflet-control-geocoder, .leaflet-control-navbar');
