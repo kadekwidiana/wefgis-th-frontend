@@ -171,81 +171,63 @@ const settlement = L.layerGroup();
 const sugarcane = L.layerGroup();
 const water = L.layerGroup();
 
-// geoserver
+// geoserver layer
 const chachoengsao_prov = L.layerGroup();
 const river_chachoengsao = L.layerGroup();
 const crops_chachoengsao = L.layerGroup();
 const water_body = L.layerGroup();
 const building_polygon = L.layerGroup();
 
-// earth_engine
-const occurence = L.layerGroup();
-const change_intensity = L.layerGroup();
-const water_season = L.layerGroup();
-const land_cover = L.layerGroup();
+// earth_engine layer
+const tci = L.layerGroup();
+const vci = L.layerGroup();
+const vhi = L.layerGroup();
 
-const overlays = {
-    'Baresoil': baresoil,
-    'Cassava': cassava,
-    'Corn': crop,
-    'Eucalyptus': eucalyptus,
-    'Forest': forest,
-    'Grassland': grassland,
-    'Paddy': paddy,
-    'Palm': palm,
-    'Rubber': rubber,
-    'Building': settlement,
-    'Sugarcane': sugarcane,
-    'Water Point': water,
-};
+// earth data
+$.getJSON("http://127.0.0.1:8000/api/earthData", function (data) {
+    let tciUrl = data.map.tci;
+    let vciUrl = data.map.vci;
+    let vhiUrl = data.map.vhi;
 
-// LAYER GOOGLE EART ENGINE
-const tileLayer_occurence = L.tileLayer('https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/7b278f32a53ade7f4bbabe13c6941b5e-68af052d81df7cd77787c1d760304e0b/tiles/{z}/{x}/{y}', {
+    // LAYER GOOGLE EART ENGINE
+    const tileLayer_tci = L.tileLayer(tciUrl, {
+    });
+    tileLayer_tci.addTo(tci);
+
+    const tileLayer_vci = L.tileLayer(vciUrl, {
+    });
+    tileLayer_vci.addTo(vci);
+
+    const tileLayer_vhi = L.tileLayer(vhiUrl, {
+    });
+    tileLayer_vhi.addTo(vhi);
+
+}).fail(function (jqXHR, textStatus, error) {
+    console.log("Error: " + error);
 });
-tileLayer_occurence.addTo(occurence);
-
-const tileLayer_change_intensity = L.tileLayer('https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/096e64d44655187ed7643156a65f4a30-c95703303bb76d87c2575ce0308f0789/tiles/{z}/{x}/{y}', {
-});
-tileLayer_change_intensity.addTo(change_intensity);
-
-const tileLayer_water_season = L.tileLayer('https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/f483f8237d873eaf08fec49b1e38fef9-275f8d9f874c56d2156044c4c975f46f/tiles/{z}/{x}/{y}', {
-});
-tileLayer_water_season.addTo(water_season);
-
-const tileLayer_land_cover = L.tileLayer('https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/0490caeb7421393379c62cb23799d80b-9dbd74a46871acbf3b1a053b6433e025/tiles/{z}/{x}/{y}', {
-});
-tileLayer_land_cover.addTo(land_cover);
 
 // Event listener untuk checkbox Crop
-document.getElementById('water_occurence').addEventListener('change', function () {
+document.getElementById('tci').addEventListener('change', function () {
     if (this.checked) {
-        occurence.addTo(map); // Menampilkan lapisan marker Crop
+        tci.addTo(map); // Menampilkan lapisan marker Crop
     } else {
-        occurence.removeFrom(map); // Menghilangkan lapisan marker Crop
+        tci.removeFrom(map); // Menghilangkan lapisan marker Crop
     }
 });
 // Event listener untuk checkbox Crop
-document.getElementById('change_intensity').addEventListener('change', function () {
+document.getElementById('vci').addEventListener('change', function () {
     if (this.checked) {
-        change_intensity.addTo(map); // Menampilkan lapisan marker Crop
+        vci.addTo(map); // Menampilkan lapisan marker Crop
     } else {
-        change_intensity.removeFrom(map); // Menghilangkan lapisan marker Crop
+        vci.removeFrom(map); // Menghilangkan lapisan marker Crop
     }
 });
 // Event listener untuk checkbox Crop
-document.getElementById('water_season').addEventListener('change', function () {
+document.getElementById('vhi').addEventListener('change', function () {
     if (this.checked) {
-        water_season.addTo(map); // Menampilkan lapisan marker Crop
+        vhi.addTo(map); // Menampilkan lapisan marker Crop
     } else {
-        water_season.removeFrom(map); // Menghilangkan lapisan marker Crop
-    }
-});
-// Event listener untuk checkbox Crop
-document.getElementById('land_cover').addEventListener('change', function () {
-    if (this.checked) {
-        land_cover.addTo(map); // Menampilkan lapisan marker Crop
-    } else {
-        land_cover.removeFrom(map); // Menghilangkan lapisan marker Crop
+        vhi.removeFrom(map); // Menghilangkan lapisan marker Crop
     }
 });
 
