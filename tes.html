@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geographic</title>
+    <link rel="icon" href="assets/icons/icon-navigasi/location.png" type="image/x-icon">
+    <!-- css bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- css leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- SAEARCH GEOCODER -->
+    <link rel="stylesheet" href="assets/css-leaflet/leaflet-control-geocoder.Geocoder.css">
+    <!-- NAVIGASI BAR -->
+    <link rel="stylesheet" href="assets/css-leaflet/Leaflet.NavBar.css">
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- sidebar css -->
+    <link rel="stylesheet" href="css/sidebar.css">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- leaflet draw -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+        $(document).ready(function () {
+            $.getJSON('http://127.0.0.1:8000/api/pointCrop/json', function (data) {
+                console.log('tes' + data)
+            });
+        });
+    </script>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Dummy data for demonstration
+        var monthlyRainfall = {
+            January: 50,
+            February: 30,
+            March: 20,
+            April: 40,
+            May: 60,
+            June: 70,
+            July: 80,
+            August: 90,
+            September: 100,
+            October: 110,
+            November: 120,
+            December: 130,
+        };
+
+        // Function to create a chart popup
+        function createChartPopup(latlng, markerIndex) {
+            var marker = L.marker(latlng).addTo(map);
+
+            marker.on('click', function () {
+                var popupContent = '<canvas id="myChart' + markerIndex + '" width="600" height="500"></canvas>';
+                marker.bindPopup(popupContent).openPopup();
+
+                var ctx = document.getElementById('myChart' + markerIndex).getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                maxTicksLimit: 12,
+                            },
+                            y: {
+                                min: 0,
+                                max: 500,
+                                beginAtZero: true,
+                            }
+                        },
+                    },
+                    data: {
+                        labels: Object.keys(monthlyRainfall),
+                        datasets: [{
+                            label: 'Comulative Rainfall',
+                            data: Object.values(monthlyRainfall),
+                            backgroundColor: 'red',
+                            borderColor: 'red',
+                            borderWidth: 1
+                        }]
+                    }
+                });
+            });
+        }
+
+        var marker1 = L.marker([51.505, -0.09]).addTo(map);
+        var marker2 = L.marker([51.515, -0.1]).addTo(map);
+
+        createChartPopup(marker1.getLatLng(), 1);
+        createChartPopup(marker2.getLatLng(), 2);
+    </script>
+</body>
+
+</html>

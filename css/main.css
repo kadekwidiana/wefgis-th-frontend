@@ -1,8 +1,14 @@
 /* style map */
+body {
+    overflow: hidden;
+}
+
 #map {
     width: 100%;
-    height: 93vh;
+    /* height: 93vh; */
+    height: calc(100vh - 55px);
     z-index: 1;
+    padding: 0;
 }
 
 .custom-image-basemap {
@@ -19,4 +25,64 @@
 /* Gaya untuk scale control */
 .leaflet-control-scale {
     font-size: 14px;
+}
+
+/* Add this to your CSS */
+#loading-overlay,
+#failed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 125%;
+    background-color: transparent;
+    /* Semi-transparent white background */
+    display: flex;
+    /* Use flexbox */
+    justify-content: center;
+    /* Horizontally center content */
+    align-items: center;
+    /* Vertically center content */
+    z-index: 9999;
+    /* Make sure the overlay is on top of everything */
+}
+
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #333;
+    /* Color of the spinner */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    /* Animation for spinning */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.popup-container {
+    width: 300px;
+    /* Adjust as needed */
+    height: 350px;
+    /* Adjust as needed */
+    /* padding: 5px; */
+    /* margin-bottom: 30px; */
+}
+
+.popup-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.popup-coordinates {
+    margin-bottom: 3px;
 }

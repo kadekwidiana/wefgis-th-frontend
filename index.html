@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geographic Information System</title>
+    <link rel="icon" href="assets/icons/icon-navigasi/location.png" type="image/x-icon">
     <!-- css bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- css leaflet -->
@@ -28,7 +29,11 @@
     <!-- chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- leaflet draw -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+
 </head>
+<!-- tes -->
 
 <body>
     <!-- Navbar -->
@@ -39,10 +44,8 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
         </div>
     </nav>
-
 
     <!-- Sidebar basemap -->
     <div class="container sidebar-basemap bg-white mt-0" id="sidebar-basemap">
@@ -244,7 +247,7 @@
             </div>
             <div class="border rounded mt-2">
                 <!-- <div class="border-top"></div> -->
-                <p class="bg-secondary p-2 m-0 rounded-top fw-bold">Water Google Earth Engine</p>
+                <p class="bg-secondary p-2 m-0 rounded-top fw-bold">Google Earth Engine</p>
                 <div class="p-2">
                     <div class="form-check">
                         <input name="tci" class="form-check-input border border-secondary" type="checkbox" value=""
@@ -267,6 +270,58 @@
                             VHI
                         </label>
                     </div>
+                </div>
+
+                <!-- Tambahkan item lain di sini -->
+            </div>
+
+            <div class="border rounded mt-2">
+                <!-- <div class="border-top"></div> -->
+                <p class="bg-secondary p-2 m-0 rounded-top fw-bold">GEE Water</p>
+                <div class="p-2">
+                    <div class="form-check">
+                        <input name="change_intensity" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="change_intensity" data-layer="change_intensity">
+                        <label class="form-check-label" for="change_intensity">
+                            change_intensity
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="igbp" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="igbp" data-layer="igbp">
+                        <label class="form-check-label" for="igbp">
+                            IGBP
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="lst" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="lst" data-layer="lst">
+                        <label class="form-check-label" for="lst">
+                            LST
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="occurrence" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="occurrence" data-layer="occurrence">
+                        <label class="form-check-label" for="occurrence">
+                            Occurrence
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="water" class="form-check-input border border-secondary" type="checkbox" value=""
+                            id="water" data-layer="water">
+                        <label class="form-check-label" for="water">
+                            Water
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="water_season" class="form-check-input border border-secondary" type="checkbox"
+                            value="" id="water_season" data-layer="water_season">
+                        <label class="form-check-label" for="water_season">
+                            Water Season
+                        </label>
+                    </div>
+
                 </div>
 
                 <!-- Tambahkan item lain di sini -->
@@ -435,17 +490,36 @@
         <h5 class="text-center">Information</h5>
         <div class="border mb-2"></div>
         <div class="col">
-            <div class="border rounded mt-2">
-                <canvas id="chartVHI"></canvas>
-                <p class="text-center">Month</p>
+            <div class="border rounded mt-2 p-2">
+
+                <form action="" method="post" id="datForm">
+                    <div class="form-group mt-2">
+                        <label for="geometry">Geometry</label>
+                        <textarea class="form-control" id="geometry" name="geometry" placeholder="geojson"></textarea>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="area">Area</label>
+                        <input class="form-control" id="area" name="area" placeholder="area">
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-2">
+                        <button type="button" class="btn btn-info" id="getInfoBtn">Get Information</button>
+                    </div>
+                </form>
             </div>
-            <div class="border rounded mt-2">
-                <canvas id="chartVCI"></canvas>
-                <p class="text-center">Month</p>
-            </div>
-            <div class="border rounded mt-2 mb-3">
-                <canvas id="chartTCI"></canvas>
-                <p class="text-center">Month</p>
+            <div class="">
+                <div class="border rounded mt-2 mb-3">
+                    <canvas id="chartTCI"></canvas>
+                    <p class="text-center">Month</p>
+                </div>
+                <div class="border rounded mt-2">
+                    <canvas id="chartVCI"></canvas>
+                    <p class="text-center">Month</p>
+                </div>
+                <div class="border rounded mt-2">
+                    <canvas id="chartVHI"></canvas>
+                    <p class="text-center">Month</p>
+                </div>
             </div>
         </div>
     </div>
@@ -453,13 +527,16 @@
 
     <!-- Content -->
     <div class="content">
-        <!-- Elemen untuk Menampilkan Peta -->
         <div id="map">
 
         </div>
     </div>
     <!-- js bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <!-- Include Bootstrap JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -473,8 +550,20 @@
     <script src="js/main.js"></script>
     <!-- CHART JS -->
     <script src="js/chart.js"></script>
+    <!-- CHART-POPUP JS -->
+    <script src="js/chart-popup.js"></script>
     <!-- sidebar js -->
     <script src="js/sidebar.js"></script>
+
+    <!-- leaflet js draw -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js">
+    </script>
+    <!-- turf and axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
+
+    <!-- feature draw -->
+    <script src="js/draw.js"></script>
 
 </body>
 

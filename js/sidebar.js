@@ -10,18 +10,12 @@ function adjustPositionControlSidebarRight(sidebarClass) {
     });
 
     // Atur posisi control basemap, layer, dan legend
-    var controlContainers = document.querySelectorAll('.container-control-basemap, .container-control-layer, .container-control-legend');
+    var controlContainers = document.querySelectorAll('.container-control-basemap, .container-control-layer, .container-control-legend,.container-control-street-view');
     controlContainers.forEach(function (controlContainer) {
         controlContainer.style.right = sidebarWidth + 'px';
     });
 }
 
-// Panggil fungsi adjustPositionControlSidebarRight dengan kelas sidebar yang sesuai
-// adjustPositionControlSidebarRight('.sidebar-basemap');
-// adjustPositionControlSidebarRight('.sidebar-layer');
-// adjustPositionControlSidebarRight('.sidebar-legend');
-
-// Function to close basemap sidebar and adjust icons
 function closeBasemapSidebar() {
     var basemapSidebar = document.getElementById("sidebar-basemap");
     if (basemapSidebar.classList.contains("active")) {
@@ -81,7 +75,6 @@ var customControlBasemap = L.Control.extend({
         return container;
     }
 });
-
 // Add the custom button to the map
 map.addControl(new customControlBasemap());
 
@@ -141,20 +134,47 @@ var customControlLegend = L.Control.extend({
         return container;
     }
 });
-
 // Add the custom button to the map
 map.addControl(new customControlLegend());
+
+// Control button legend
+var controlStreetView = L.Control.extend({
+    options: {
+        position: 'bottomright'
+    },
+
+    onAdd: function () {
+        var container = L.DomUtil.create('div', 'btn btn-light btn-outline-secondary container-control-street-view');
+        var button = L.DomUtil.create('button', 'button-control-street-view', container);
+        var icon = L.DomUtil.create('i', 'fa-solid fa-person fa-lg');
+        button.appendChild(icon);
+
+        button.addEventListener("click", function () {
+            // Add a click event listener to the map only after the button is clicked
+            map.on('click', function (e) {
+                let lat = e.latlng.lat.toPrecision(8);
+                let lon = e.latlng.lng.toPrecision(8);
+                const point = L.marker([lat, lon]).addTo(map)
+                    .bindPopup('<a href="http://maps.google.com/maps?q=&layer=c&cbll=' + lat + ',' + lon + '&cbp=11,0,0,0" target="_blank"><b>View</b></a>').openPopup();
+            });
+        });
+
+        return container;
+    }
+});
+
+// Add the custom button to the map
+map.addControl(new controlStreetView());
+
 // END SIDEBAR RIGTH
 
 // START SIDEBAR LEFT
 // Menyeseuaikan posisi control sidebar basemap
-
-
 function adjustPositionControlSidebarLeft(sidebarClass) {
     var sidebarWidth = document.querySelector(sidebarClass + '.active') ? 450 : 0; // Adjust the width based on sidebar visibility
 
     // Atur posisi control leaflet
-    var controlContainersLeaflet = document.querySelectorAll('.leaflet-control-scale, .leaflet-control-geocoder, .leaflet-control-navbar');
+    var controlContainersLeaflet = document.querySelectorAll('.leaflet-control-scale, .leaflet-control-geocoder, .leaflet-control-navbar, .leaflet-draw ');
     controlContainersLeaflet.forEach(function (controlContainerLeaflet) {
         controlContainerLeaflet.style.left = sidebarWidth + 'px';
     });
@@ -179,6 +199,7 @@ function closeAnalisisSidebar() {
         basemapButton.classList.remove("active"); // Remove active class from the button
     }
 }
+
 
 // Control button legend
 var customControlAnalisis = L.Control.extend({
@@ -205,3 +226,12 @@ var customControlAnalisis = L.Control.extend({
 });
 // Add the custom button to the map
 map.addControl(new customControlAnalisis());
+
+// navigasi bar
+L.control.navbar().addTo(map);
+
+// hash
+var hash = new L.Hash(map);
+
+// skala
+L.control.scale().addTo(map);

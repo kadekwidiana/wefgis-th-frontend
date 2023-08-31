@@ -231,6 +231,126 @@ document.getElementById('vhi').addEventListener('change', function () {
     }
 });
 
+// // WATER GEE
+// $.getJSON("http://127.0.0.1:8000/api/water-occurrences", function (data_map) {
+//     console.log(data_map.map.IGBP);
+
+//     const tileLayer_changeIntensity = L.tileLayer(data_map.map.ChangeIntensity, {
+//     });
+//     tileLayer_changeIntensity.addTo(change_intensity);
+
+//     const tileLayer_igbp = L.tileLayer(data_map.map.IGBP, {
+//     });
+//     tileLayer_igbp.addTo(igpb);
+
+//     const tileLayer_lst = L.tileLayer(data_map.map.LST, {
+//     });
+//     tileLayer_lst.addTo(lst);
+
+//     const tileLayer_occurrence = L.tileLayer(data_map.map.Occurrence, {
+//     });
+//     tileLayer_occurrence.addTo(occurrence);
+
+//     const tileLayer_water = L.tileLayer(data_map.map.Water, {
+//     });
+//     tileLayer_water.addTo(water_gee);
+
+//     const tileLayer_waterSeason = L.tileLayer(data_map.map.WaterSeason, {
+//     });
+//     tileLayer_waterSeason.addTo(water_season);
+
+// }).fail(function (jqXHR, textStatus, error) {
+//     console.log("Error: " + error);
+// });
+
+// const change_intensity = L.layerGroup();
+// const igpb = L.layerGroup();
+// const lst = L.layerGroup();
+// const occurrence = L.layerGroup();
+// const water_gee = L.layerGroup();
+// const water_season = L.layerGroup();
+
+// // Change Intensity
+// document.getElementById('change_intensity').addEventListener('change', function () {
+//     if (this.checked) {
+//         change_intensity.addTo(map); // Menampilkan lapisan marker Crop
+//     } else {
+//         change_intensity.removeFrom(map); // Menghilangkan lapisan marker Crop
+//     }
+// });
+// // IGBP
+// document.getElementById('igbp').addEventListener('change', function () {
+//     if (this.checked) {
+//         igpb.addTo(map); // Menampilkan lapisan marker Crop
+//     } else {
+//         igpb.removeFrom(map); // Menghilangkan lapisan marker Crop
+//     }
+// });
+// // LST
+// document.getElementById('lst').addEventListener('change', function () {
+//     if (this.checked) {
+//         lst.addTo(map); // Menampilkan lapisan marker Crop
+//     } else {
+//         lst.removeFrom(map); // Menghilangkan lapisan marker Crop
+//     }
+// });
+// // Occurence
+// document.getElementById('occurrence').addEventListener('change', function () {
+//     if (this.checked) {
+//         occurrence.addTo(map); // Menampilkan lapisan marker Crop
+//     } else {
+//         occurrence.removeFrom(map); // Menghilangkan lapisan marker Crop
+//     }
+// });
+// // Water
+// document.getElementById('water').addEventListener('change', function () {
+//     if (this.checked) {
+//         water_gee.addTo(map); // Menampilkan lapisan marker Crop
+//     } else {
+//         water_gee.removeFrom(map); // Menghilangkan lapisan marker Crop
+//     }
+// });
+// // Water Season
+// document.getElementById('water_season').addEventListener('change', function () {
+//     if (this.checked) {
+//         water_season.addTo(map); // Menampilkan lapisan marker Crop
+//     } else {
+//         water_season.removeFrom(map); // Menghilangkan lapisan marker Crop
+//     }
+// });
+
+
+$(document).ready(function () {
+    $("#getInfoBtn").click(function () {
+        // Mengambil nilai dari input geometry dan type
+        var geometryValue = $("#geometry").val();
+        var typeValue = 'point';
+
+        // Data yang akan dikirim dalam permintaan POST
+        var postData = {
+            geometry: geometryValue,
+            type: typeValue,
+            startYear: '2022',
+            endYear: '2022'
+        };
+
+        // URL tujuan
+        var url = "http://127.0.0.1:8000/api/water-preception";
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify(postData),
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Berhasil:", response);
+            },
+            error: function (error) {
+                console.log("Gagal:", error);
+            }
+        });
+    });
+});
 
 // LAYER GEOSERVER
 // geo server river thailand
@@ -315,196 +435,6 @@ document.getElementById('building_polygon').addEventListener('change', function 
 });
 
 
-// LAYER MARKER CROP
-// Event listener untuk checkbox Crop
-document.getElementById('point_corn').addEventListener('change', function () {
-    if (this.checked) {
-        crop.addTo(map); // Menampilkan lapisan marker Crop
-    } else {
-        crop.removeFrom(map); // Menghilangkan lapisan marker Crop
-    }
-});
-
-// Event listener untuk checkbox Paddy
-document.getElementById('point_paddy').addEventListener('change', function () {
-    if (this.checked) {
-        paddy.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        paddy.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Baresoil
-document.getElementById('point_baresoil').addEventListener('change', function () {
-    if (this.checked) {
-        baresoil.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        baresoil.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Cassava
-document.getElementById('point_cassava').addEventListener('change', function () {
-    if (this.checked) {
-        cassava.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        cassava.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Eucalyptus
-document.getElementById('point_eucalyptus').addEventListener('change', function () {
-    if (this.checked) {
-        eucalyptus.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        eucalyptus.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Forest
-document.getElementById('point_forest').addEventListener('change', function () {
-    if (this.checked) {
-        forest.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        forest.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Grassland
-document.getElementById('point_grassland').addEventListener('change', function () {
-    if (this.checked) {
-        grassland.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        grassland.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Palm
-document.getElementById('point_palm').addEventListener('change', function () {
-    if (this.checked) {
-        palm.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        palm.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Rubber
-document.getElementById('point_rubber').addEventListener('change', function () {
-    if (this.checked) {
-        rubber.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        rubber.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Building
-document.getElementById('point_building').addEventListener('change', function () {
-    if (this.checked) {
-        settlement.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        settlement.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Sugarcane
-document.getElementById('point_sugarcane').addEventListener('change', function () {
-    if (this.checked) {
-        sugarcane.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        sugarcane.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// Event listener untuk checkbox Sugarcane
-document.getElementById('point_water').addEventListener('change', function () {
-    if (this.checked) {
-        water.addTo(map); // Menampilkan lapisan marker Paddy
-    } else {
-        water.removeFrom(map); // Menghilangkan lapisan marker Paddy
-    }
-});
-
-// get data by mysql
-$(document).ready(function () {
-    $.getJSON('http://127.0.0.1:8000/api/pointCrop/json', function (data) {
-        // loop class Baresoil
-        $.each(data, function (index) {
-            if (data[index].class === 'Baresoil') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: baresoilIcon }).addTo(baresoil).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude + '<br> Address : ');
-            }
-        });
-        // loop class Cassava   
-        $.each(data, function (index) {
-            if (data[index].class === 'Cassava') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: cassavaIcon }).addTo(cassava).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-
-        });
-        // loop class Crop
-        $.each(data, function (index) {
-            if (data[index].class === 'Crop') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: cropIcon }).addTo(crop).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-
-        });
-        // loop class Eucalyptus 	
-        $.each(data, function (index) {
-            if (data[index].class === 'Eucalyptus') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: eucalyptusIcon }).addTo(eucalyptus).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-
-        });
-        // loop class Forest	
-        $.each(data, function (index) {
-            if (data[index].class === 'Forest') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: forestIcon }).addTo(forest).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-        // loop class Grassland	
-        $.each(data, function (index) {
-            if (data[index].class === 'Grassland') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: grasslandIcon }).addTo(grassland).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-        // loop class Paddy	
-        $.each(data, function (index) {
-            if (data[index].class === 'Paddy') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: paddyIcon }).addTo(paddy).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-        // loop class Palm	
-        $.each(data, function (index) {
-            if (data[index].class === 'Palm') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: palmIcon }).addTo(palm).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-        // loop class Rubber	
-        $.each(data, function (index) {
-            if (data[index].class === 'Rubber') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: rubberIcon }).addTo(rubber).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-        // loop class Settlement 		
-        $.each(data, function (index) {
-            if (data[index].class === 'Settlement') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: settlementIcon }).addTo(settlement).bindPopup('Class : Building<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-        // loop class Sugarcane 		
-        $.each(data, function (index) {
-            if (data[index].class === 'Sugarcane') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: sugarcaneIcon }).addTo(sugarcane).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-        // loop class Water 		
-        $.each(data, function (index) {
-            if (data[index].class === 'Water') {
-                L.marker([parseFloat(data[index].latitude), parseFloat(data[index].longitude)], { icon: waterIcon }).addTo(water).bindPopup('Class : ' + data[index].class + '<br>  Coordinat : ' + data[index].latitude + ',' + data[index].longitude);
-            }
-        });
-    });
-});
-
 
 // search
 var osmGeocoder = new L.Control.Geocoder({
@@ -518,15 +448,6 @@ document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
 document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
     .title += 'Search for a place';
 
-// hash
-var hash = new L.Hash(map);
-
-// navigasi bar
-L.control.navbar().addTo(map);
-
-// skala
-L.control.scale().addTo(map);
-
 // Custom zoom control
 var customZoomControl = L.control.zoom({
     position: 'bottomright'  // Set the position to bottom right
@@ -534,14 +455,6 @@ var customZoomControl = L.control.zoom({
 // Add the custom zoom control to the map
 map.addControl(customZoomControl);
 
-var marker1 = L.marker([51.505, -0.09]);
-marker1.bindPopup("Marker 1");
-
-var marker2 = L.marker([51.51, -0.1]);
-marker2.bindPopup("Marker 2");
-
-var markerGroup1 = L.layerGroup([marker1]);
-var markerGroup2 = L.layerGroup([marker2]);
 
 // Menambahkan event listener untuk checkbox
 var checkboxes = document.querySelectorAll('.itemCheckbox');

@@ -36,7 +36,8 @@
 /* Transisi Container control basemap, layer, legend */
 .container-control-basemap,
 .container-control-layer,
-.container-control-legend {
+.container-control-legend,
+.container-control-street-view {
     transition: right 0.3s;
 }
 
@@ -49,6 +50,19 @@
     width: 20px;
     /* Tentukan lebar tombol */
     height: 30px;
+    /* Tentukan tinggi tombol */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.button-control-street-view {
+    background-color: transparent !important;
+    border: none !important;
+    width: 10px;
+    /* Tentukan lebar tombol */
+    height: 25px;
     /* Tentukan tinggi tombol */
     display: flex;
     align-items: center;
@@ -91,7 +105,8 @@
 /* search */
 .leaflet-control-geocoder,
 /* navigasi bar */
-.leaflet-control-navbar {
+.leaflet-control-navbar,
+.leaflet-draw {
     transition: left 0.3s;
 }
 
@@ -106,3 +121,5 @@
     justify-content: center;
     cursor: pointer;
 }
+
+/* tes */
